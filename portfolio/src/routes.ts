@@ -4,14 +4,19 @@ import { Home } from './pages/Home'
 import { Projects } from './pages/Projects'
 import { Involvements } from './pages/Involvements'
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      Component: Root,
+      children: [
+        { index: true, Component: Home },
+        { path: 'projects', Component: Projects },
+        { path: 'involvements', Component: Involvements },
+      ],
+    },
+  ],
   {
-    path: '/',
-    Component: Root,
-    children: [
-      { index: true, Component: Home },
-      { path: 'projects', Component: Projects },
-      { path: 'involvements', Component: Involvements },
-    ],
+    basename: import.meta.env.BASE_URL,
   },
-])
+)
