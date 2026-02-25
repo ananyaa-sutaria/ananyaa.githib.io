@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import resumePdf from '../assets/Ananyaa Sutaria Resume.pdf'
 import profilePic from '../assets/profile pic.png'
+import thinkPinkTeamPhoto from '../assets/projects/thinkpink/team photo.JPEG'
 
 const featuredProjects = [
   {
@@ -121,6 +123,13 @@ export function Home() {
               >
                 View Involvements
               </a>
+              <a
+                href={resumePdf}
+                download="Ananyaa-Sutaria-Resume.pdf"
+                className="px-6 py-3 border border-primary text-primary rounded-lg hover:bg-secondary transition-colors"
+              >
+                Download Resume
+              </a>
             </div>
           </div>
 
@@ -163,115 +172,151 @@ export function Home() {
 
         <div className="mt-12 space-y-8">
           <div className="p-6 rounded-xl bg-white">
-            <div className="-mx-6 mb-4 bg-primary text-white text-center py-3 px-6 rounded-lg">
-              <h3>Featured Projects</h3>
-            </div>
-            <div className="relative">
-              <button
-                type="button"
-                onClick={prevProject}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
-                aria-label="Previous project"
-              >
-                {'<'}
-              </button>
-              <div className="mx-12 overflow-hidden py-4">
-                <div
-                  className="flex gap-5 items-stretch transition-transform duration-700 ease-in-out"
-                  style={{
-                    transform: `translateX(calc(50% - ${
-                      centeredProjectIndex * (cardWidth + gapWidth) + cardWidth / 2
-                    }rem))`,
-                  }}
-                >
-                  {projectsLoop.map((project, index) => {
-                    const distance = Math.abs(index - centeredProjectIndex)
-                    const isCenter = distance === 0
-                    const isNear = distance === 1
-                    return (
-                      <a
-                        key={`project-${index}-${project.title}`}
-                        href={project.link}
-                        className={`w-72 shrink-0 p-6 min-h-56 rounded-xl border bg-secondary transition-all duration-700 ease-in-out ${
-                          isCenter
-                            ? 'border-primary/40 shadow-md scale-110 opacity-100'
-                            : isNear
-                              ? 'border-border scale-95 opacity-75'
-                              : 'border-border scale-90 opacity-45'
-                        }`}
-                      >
-                        <p className="text-xs text-primary mb-2">{project.subtitle}</p>
-                        <h4 className="mb-2">{project.title}</h4>
-                        <p className="text-sm text-muted-foreground">{project.summary}</p>
-                      </a>
-                    )
-                  })}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-center">
+              <div className="lg:col-span-3">
+                <div className="mb-4 mx-12">
+                  <div className="w-72 mx-auto bg-primary text-white text-center py-2 rounded-xl shadow-md shadow-primary/20">
+                    <h3>Featured Projects</h3>
+                  </div>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={nextProject}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
-                aria-label="Next project"
-              >
-                {'>'}
-              </button>
+              <div className="hidden lg:block" />
+
+              <div className="relative lg:col-span-3">
+                <button
+                  type="button"
+                  onClick={prevProject}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
+                  aria-label="Previous project"
+                >
+                  {'<'}
+                </button>
+                <div className="mx-12 overflow-hidden py-4">
+                  <div
+                    className="flex gap-5 items-stretch transition-transform duration-700 ease-in-out"
+                    style={{
+                      transform: `translateX(calc(50% - ${
+                        centeredProjectIndex * (cardWidth + gapWidth) + cardWidth / 2
+                      }rem))`,
+                    }}
+                  >
+                    {projectsLoop.map((project, index) => {
+                      const distance = Math.abs(index - centeredProjectIndex)
+                      const isCenter = distance === 0
+                      const isNear = distance === 1
+                      return (
+                        <a
+                          key={`project-${index}-${project.title}`}
+                          href={project.link}
+                          className={`w-72 shrink-0 p-6 min-h-56 rounded-xl border bg-secondary transition-all duration-700 ease-in-out ${
+                            isCenter
+                              ? 'border-primary/40 shadow-md scale-110 opacity-100'
+                              : isNear
+                                ? 'border-border scale-95 opacity-75'
+                                : 'border-border scale-90 opacity-45'
+                          }`}
+                        >
+                          <p className="text-xs text-primary mb-2">{project.subtitle}</p>
+                          <h4 className="mb-2">{project.title}</h4>
+                          <p className="text-sm text-muted-foreground">{project.summary}</p>
+                        </a>
+                      )
+                    })}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={nextProject}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
+                  aria-label="Next project"
+                >
+                  {'>'}
+                </button>
+              </div>
+
+              <div className="lg:col-span-1">
+                <div className="w-72 min-h-56 mx-auto scale-110 rounded-xl p-1 bg-gradient-to-br from-primary/60 via-accent/60 to-primary/30 shadow-lg shadow-primary/20 transition-all duration-700 ease-in-out">
+                  <img
+                    src={thinkPinkTeamPhoto}
+                    alt="Think Pink team"
+                    className="w-full h-56 rounded-lg object-cover border-2 border-background"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="p-6 rounded-xl bg-white">
-            <div className="-mx-6 mb-4 bg-primary text-white text-center py-3 px-6 rounded-lg">
-              <h3>Leadership & Involvement</h3>
-            </div>
-            <div className="relative">
-              <button
-                type="button"
-                onClick={prevInvolvement}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
-                aria-label="Previous involvement"
-              >
-                {'<'}
-              </button>
-              <div className="mx-12 overflow-hidden py-4">
-                <div
-                  className="flex gap-5 items-stretch transition-transform duration-700 ease-in-out"
-                  style={{
-                    transform: `translateX(calc(50% - ${
-                      centeredInvolvementIndex * (cardWidth + gapWidth) + cardWidth / 2
-                    }rem))`,
-                  }}
-                >
-                  {involvementsLoop.map((item, index) => {
-                    const distance = Math.abs(index - centeredInvolvementIndex)
-                    const isCenter = distance === 0
-                    const isNear = distance === 1
-                    return (
-                      <a
-                        key={`involvement-${index}-${item.title}`}
-                        href={item.link}
-                        className={`w-72 shrink-0 p-6 min-h-56 rounded-xl border bg-secondary transition-all duration-700 ease-in-out ${
-                          isCenter
-                            ? 'border-primary/40 shadow-md scale-110 opacity-100'
-                            : isNear
-                              ? 'border-border scale-95 opacity-75'
-                              : 'border-border scale-90 opacity-45'
-                        }`}
-                      >
-                        <h4 className="mb-2">{item.title}</h4>
-                        <p className="text-sm text-muted-foreground">{item.summary}</p>
-                      </a>
-                    )
-                  })}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-center">
+              <div className="lg:col-span-1 order-2 lg:order-1">
+                <div className="w-72 min-h-56 mx-auto scale-110 rounded-xl p-1 bg-gradient-to-br from-primary/60 via-accent/60 to-primary/30 shadow-lg shadow-primary/20 transition-all duration-700 ease-in-out">
+                  <div className="w-full h-56 rounded-lg border-2 border-background bg-secondary flex items-center justify-center px-4 text-center">
+                    <p className="text-sm text-muted-foreground">
+                      Leadership photo placeholder
+                    </p>
+                  </div>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={nextInvolvement}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
-                aria-label="Next involvement"
-              >
-                {'>'}
-              </button>
+
+              <div className="lg:col-span-3 order-1 lg:order-2">
+                <div className="mb-4 mx-12">
+                  <div className="w-72 mx-auto bg-primary text-white text-center py-2 rounded-xl shadow-md shadow-primary/20">
+                    <h3>Leadership & Involvement</h3>
+                  </div>
+                </div>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={prevInvolvement}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
+                    aria-label="Previous involvement"
+                  >
+                    {'<'}
+                  </button>
+                  <div className="mx-12 overflow-hidden py-4">
+                    <div
+                      className="flex gap-5 items-stretch transition-transform duration-700 ease-in-out"
+                      style={{
+                        transform: `translateX(calc(50% - ${
+                          centeredInvolvementIndex * (cardWidth + gapWidth) + cardWidth / 2
+                        }rem))`,
+                      }}
+                    >
+                      {involvementsLoop.map((item, index) => {
+                        const distance = Math.abs(index - centeredInvolvementIndex)
+                        const isCenter = distance === 0
+                        const isNear = distance === 1
+                        return (
+                          <a
+                            key={`involvement-${index}-${item.title}`}
+                            href={item.link}
+                            className={`w-72 shrink-0 p-6 min-h-56 rounded-xl border bg-secondary transition-all duration-700 ease-in-out ${
+                              isCenter
+                                ? 'border-primary/40 shadow-md scale-110 opacity-100'
+                                : isNear
+                                  ? 'border-border scale-95 opacity-75'
+                                  : 'border-border scale-90 opacity-45'
+                            }`}
+                          >
+                            <h4 className="mb-2">{item.title}</h4>
+                            <p className="text-sm text-muted-foreground">
+                              {item.summary}
+                            </p>
+                          </a>
+                        )
+                      })}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={nextInvolvement}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-border bg-white text-primary hover:bg-secondary"
+                    aria-label="Next involvement"
+                  >
+                    {'>'}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
